@@ -13,6 +13,8 @@ function App() {
     e.preventDefault();
     let id = ++e.target.id;
     let file_reader = new FileReader();
+
+   
     let file = e.target.files[0];
     // console.log(e.target.files);
     // console.log(files);

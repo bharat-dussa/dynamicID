@@ -2,40 +2,35 @@ import React, { useState } from "react";
 import "./App.css";
 
 function App() {
-    
-  const [files, setFiles] = useState([]);
+//   const [fileList, setfileList] = useState([]);
+  var fileList=[];
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("File upload successfully");
-    console.log(files);
+    fileList.forEach(function(file){
+        console.log(file);
+    })
   }
 
   function onFilesUpload(e) {
- 
-    e.preventDefault();
-    let idI=0;
-    let id = e.target.id;
-    let file_reader = new FileReader();
-    let file = e.target.files[0];
-    file_reader.onload = () => {
-    console.log(file_reader.result)
-      setFiles([
-        ...files,
-        {
-          id: ++idI,
-          uploaded_file: file_reader.result,
-        },
-      ]);
-    };
-    file_reader.readAsDataURL(file);
+     fileList=[];
+     for(var i=0;i<e.target.files.length;i++) {
+         console.log(e.target.files[0]);
+         fileList.push([{
+             id:i,
+             uploaded_file:e.target.files[i].name
+         }])
+     }
+
+
   }
+
   return (
     <div className="App">
       <form onSubmit={handleSubmit}>
         <h1>File Upload Task</h1>
         <div>
-          <input class="" multiple onChange={onFilesUpload}  type="file" />
+          <input class="" multiple onChange={onFilesUpload} type="file" />
           <button type="submit">Upload file</button>
         </div>
       </form>
